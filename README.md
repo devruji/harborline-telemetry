@@ -46,13 +46,7 @@ Done so far: the repo layout, the docs, and the Python 3.12.7 environment. Schem
 
 ## Python
 
-pyenv selects 3.12.7 via `.python-version`. uv manages the virtualenv and dependencies. `.venv/` stays untracked.
-
-```bash
-pyenv install 3.12.7
-uv sync
-uv run python --version
-```
+Setup and run commands live in `docs/runbook.md`.
 
 ## Samples
 
