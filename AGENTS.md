@@ -10,7 +10,7 @@ Single-context layout. The technical glossary is `docs/glossary.md`. See `docs/a
 
 ### Working agreement
 
-`dev` is the integration branch. A feature is `feat/<slug>` cut from `dev`. A bug fix is `hotfix/<slug>` cut from `dev`. Promotion from `dev` to `main` is not decided. See `docs/workflow.md`.
+`dev` is the integration branch. A feature is `feat/<slug>` cut from `dev`. A bug fix is `hotfix/<slug>` cut from `dev`. `main` is the published snapshot of `dev`. Promotion is a pull request from `dev` into `main` when the user says promote. See `docs/workflow.md`.
 
 Failed attempts that should not be repeated are logged in `docs/trial-log.md`.
 
