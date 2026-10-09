@@ -9,7 +9,7 @@ The public project name is Harborline. Do not copy an organization name out of `
 | Source system | One upstream feed. This repo has three: GPS vendor (`source_a`), connected vehicle (`source_b`), logistics fleet (`source_c`). |
 | Bronze | The raw landing schema. Source values stay text. Tables: `gps_vendor_report`, `logistics_report`, `connected_packet`. |
 | Silver | The typed schema. Tables: `position_report`, `b2b_event`, `signal_row`. |
-| Gold | The answer schema. Tables: `engine_session`, `idle`, `cross_source_pair`. Filled by later SQL. |
+| Gold | The answer schema. Tables: `engine_session`, `idle`, `cross_source_pair`. The tables are filled by `sql/query1_engine_sessions.sql`, `sql/query2_idle_detection.sql`, and `sql/query3_cross_source.sql`. |
 | Position report | One row of where a vehicle was: coordinates, speed, heading, and event time. The unified table is this grain. |
 | Source lineage | The `source_system` value that says which feed a row came from. |
 | Vehicle id | The identifier used to group reports for one vehicle inside a source. GPS vendor uses the plate. Logistics uses `TKNO`. Connected-vehicle packets in the sample have none. |
