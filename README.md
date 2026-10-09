@@ -216,3 +216,7 @@ Setup and run commands live in [docs/runbook.md](docs/runbook.md).
 | `data/source_b_toyota_0x51.json` | Periodic packet: one event snapshot plus a per-second signal stream |
 | `data/source_b_toyota_0x52.json` | Engine-on packet: event snapshot only |
 | `data/source_c_logistics.xlsx` | Flat GPS track from a logistics fleet |
+
+## License
+
+The code in this repository is © devruji. All rights reserved. The files in `data/` are sample extracts supplied for this exercise and are not covered by any license here.
