@@ -15,6 +15,16 @@ sql/        analytical queries
 
 `schema/`, `pipeline/`, and `sql/` are placeholders. Nothing is implemented yet.
 
+## Python
+
+pyenv selects 3.12.7 via `.python-version`. uv manages the virtualenv and dependencies. `.venv/` stays untracked.
+
+```bash
+pyenv install 3.12.7
+uv sync
+uv run python --version
+```
+
 ## Samples
 
 | File | What it is |
