@@ -1,0 +1,282 @@
+# Declarative feed map. Adding a flat feed is a new [[feed]] block.
+# Nested connected-vehicle packets use format = "packet" and the path keys below.
+
+[bounds]
+lat_min = 5.6
+lat_max = 20.5
+lon_min = 97.3
+lon_max = 105.7
+
+[[feed]]
+id = "source_a"
+pattern = "source_a*.json"
+format = "json"
+clock = "%Y-%m-%d %H:%M:%S"
+bronze_table = "gps_vendor_report"
+time_from = "local_timestamp"
+
+[[feed.bronze_field]]
+column = "registration"
+from = "registration"
+
+[[feed.bronze_field]]
+column = "event_th"
+from = "event_th"
+
+[[feed.bronze_field]]
+column = "event_en"
+from = "event_en"
+
+[[feed.bronze_field]]
+column = "location_th"
+from = "location_th"
+
+[[feed.bronze_field]]
+column = "location_en"
+from = "location_en"
+
+[[feed.bronze_field]]
+column = "local_timestamp"
+from = "local_timestamp"
+
+[[feed.bronze_field]]
+column = "lat"
+from = "lat"
+
+[[feed.bronze_field]]
+column = "lon"
+from = "lon"
+
+[[feed.bronze_field]]
+column = "speed"
+from = "speed"
+
+[[feed.bronze_field]]
+column = "course"
+from = "course"
+
+[[feed.bronze_field]]
+column = "type_of_fix"
+from = "type_of_fix"
+
+[[feed.bronze_field]]
+column = "no_of_satellite"
+from = "no_of_satellite"
+
+[[feed.bronze_field]]
+column = "internal_power"
+from = "internal_power"
+
+[[feed.bronze_field]]
+column = "external_power"
+from = "external_power"
+
+[[feed.bronze_field]]
+column = "mileage"
+from = "mileage"
+
+[[feed.bronze_field]]
+column = "temp1"
+from = "Temp1"
+
+[[feed.bronze_field]]
+column = "temp2"
+from = "Temp2"
+
+[[feed.bronze_field]]
+column = "temp3"
+from = "Temp3"
+
+[[feed.bronze_field]]
+column = "fuel_sensor"
+from = "fuel_sensor"
+
+[[feed.bronze_field]]
+column = "fuel_canbus"
+from = "fuel_canbus"
+
+[[feed.bronze_field]]
+column = "driver_name"
+from = "driver_name"
+
+[[feed.silver_field]]
+column = "vehicle_id"
+from = "registration"
+cast = "text"
+
+[[feed.silver_field]]
+column = "latitude"
+from = "lat"
+cast = "real"
+
+[[feed.silver_field]]
+column = "longitude"
+from = "lon"
+cast = "real"
+
+[[feed.silver_field]]
+column = "speed_kmh"
+from = "speed"
+cast = "real"
+
+[[feed.silver_field]]
+column = "heading_deg"
+from = "course"
+cast = "int"
+
+[[feed.silver_field]]
+column = "fuel_sensor"
+from = "fuel_sensor"
+cast = "real"
+
+[[feed.silver_field]]
+column = "fuel_canbus"
+from = "fuel_canbus"
+cast = "real"
+
+[[feed.silver_field]]
+column = "mileage_km"
+from = "mileage"
+cast = "real"
+
+[[feed.silver_field]]
+column = "satellite_count"
+from = "no_of_satellite"
+cast = "int"
+
+[[feed.silver_field]]
+column = "gps_fix_code"
+from = "type_of_fix"
+cast = "int"
+
+[[feed.silver_field]]
+column = "internal_power_mv"
+from = "internal_power"
+cast = "real"
+
+[[feed.silver_field]]
+column = "external_power_mv"
+from = "external_power"
+cast = "real"
+
+[[feed.silver_field]]
+column = "driver_name"
+from = "driver_name"
+cast = "driver"
+
+[[feed]]
+id = "source_c"
+pattern = "source_c*.xlsx"
+format = "xlsx"
+clock = "%Y-%m-%d %H:%M:%S"
+bronze_table = "logistics_report"
+time_from = "GPS_TIME"
+
+[[feed.bronze_field]]
+column = "imei"
+from = "IMEI"
+
+[[feed.bronze_field]]
+column = "tkno"
+from = "TKNO"
+
+[[feed.bronze_field]]
+column = "latitude"
+from = "LATITUDE"
+
+[[feed.bronze_field]]
+column = "longitude"
+from = "LONGITUDE"
+
+[[feed.bronze_field]]
+column = "speed"
+from = "SPEED"
+
+[[feed.bronze_field]]
+column = "direction"
+from = "DIRECTION"
+
+[[feed.bronze_field]]
+column = "gps_status"
+from = "GPS_STATUS"
+
+[[feed.bronze_field]]
+column = "engine_status"
+from = "ENGINE_STATUS"
+
+[[feed.bronze_field]]
+column = "gps_time"
+from = "GPS_TIME"
+
+[[feed.bronze_field]]
+column = "altitude"
+from = "ALTITUDE"
+
+[[feed.silver_field]]
+column = "vehicle_id"
+from = "TKNO"
+cast = "text"
+
+[[feed.silver_field]]
+column = "latitude"
+from = "LATITUDE"
+cast = "real"
+
+[[feed.silver_field]]
+column = "longitude"
+from = "LONGITUDE"
+cast = "real"
+
+[[feed.silver_field]]
+column = "speed_kmh"
+from = "SPEED"
+cast = "real"
+
+[[feed.silver_field]]
+column = "heading_deg"
+from = "DIRECTION"
+cast = "int"
+
+[[feed.silver_field]]
+column = "altitude_m"
+from = "ALTITUDE"
+cast = "real"
+
+[[feed.silver_field]]
+column = "gps_signal_flag"
+from = "GPS_STATUS"
+cast = "flag"
+
+[[feed.silver_field]]
+column = "engine_on_flag"
+from = "ENGINE_STATUS"
+cast = "flag"
+
+[[feed]]
+id = "source_b"
+pattern = "source_b*.json"
+format = "packet"
+clock = "%Y%m%d%H%M%S"
+bronze_table = "connected_packet"
+packet_types = ["0x52", "0x51"]
+event_keys = ["B2B Event List", "B2B event"]
+contained_path = ["Engine RPM information", "Contained data List"]
+value_buckets = ["CAN", "WNG"]
+warning_bucket = "WNG"
+
+[feed.header]
+parent = ["Common header", "GPS"]
+latitude = "Lat angle"
+longitude = "Lon angle"
+timestamp = "Timestamp"
+heading = "direction"
+
+[feed.event]
+latitude = "Lat angle"
+longitude = "Lon angle"
+timestamp = "Timestamp"
+heading = "direction"
+event_type = "Event type"
+speed = "Vehicle speed"
+engine_rpm = "Engine RPM by direct line"
+gps = "GPS"
