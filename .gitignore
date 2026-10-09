@@ -10,6 +10,6 @@ output/
 private/
 
 # Local editor config.
-.cursor/agents/
-.cursor/skills/
-.cursor/rules/spawn-local-agents.mdc
+.cursor/
+AGENTS.md
+docs/agents/
