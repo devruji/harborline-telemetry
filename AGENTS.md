@@ -14,4 +14,6 @@ Single-context layout. The technical glossary is `docs/glossary.md`. See `docs/a
 
 Failed attempts that should not be repeated are logged in `docs/trial-log.md`.
 
-When `docs/workflow.md`, `docs/glossary.md`, `docs/trial-log.md`, or `docs/agents/*.md` change, update the matching line in this file in the same change. This file stays an index.
+How to set up and run the project is `docs/runbook.md`. `README.md` keeps the objective, the work, the goal, the challenge, and the deliverables.
+
+When `docs/workflow.md`, `docs/glossary.md`, `docs/trial-log.md`, `docs/runbook.md`, or `docs/agents/*.md` change, update the matching line in this file in the same change. This file stays an index.
