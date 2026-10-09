@@ -24,4 +24,15 @@ sqlite3 output/gold.sqlite < schema/gold.sql
 uv run python -m unittest tests.test_schema
 ```
 
-The pipeline and the three analytical queries are not runnable yet. Add those commands in the same change that creates them.
+What each file under `pipeline/` means is `docs/pipeline.md`.
+
+## Ingest
+
+```bash
+uv run python -m pipeline.ingest --data data --output output
+uv run python -m unittest tests.test_ingest
+```
+
+A second run of the same command inserts nothing. Gold stays empty.
+
+The three analytical queries are not runnable yet. Add those commands in the same change that creates them.

@@ -15,5 +15,6 @@ In the same change that edits any of these, update the matching one-line summary
 - `docs/glossary.md`
 - `docs/trial-log.md`
 - `docs/runbook.md`
+- `docs/pipeline.md`
 
 Add a new index line when a new doc under `docs/` is something agents must read. Do not paste those docs into `AGENTS.md`.
