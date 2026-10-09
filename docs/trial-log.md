@@ -1,6 +1,6 @@
 # Trial log
 
-Append an entry when an approach fails and a later one works, or when a file does not match the brief. Skip typos and one-off sandbox noise.
+Append an entry when an approach fails and a later one works, or when a file does not match the brief. Skip typos and one-off noise.
 
 ```markdown
 ## YYYY-MM-DD — short title
@@ -21,12 +21,6 @@ Append an entry when an approach fails and a later one works, or when a file doe
 - Tried: read both packets as `B2B Event List` plus a top-level contained-data list, with `+B Voltage Value` under `CAN`.
 - Failed because: `source_b_toyota_0x51.json` nests `Contained data List` under `Engine RPM information`. `source_b_toyota_0x52.json` uses `B2B event` (singular) and has no contained-data list. `+B Voltage Value` is under `WNG`.
 - Do instead: branch the parser on those keys. Keep the event snapshot and the signal rows in separate tables.
-
-## 2026-10-09 — GitHub auth looked logged out
-
-- Tried: `gh auth status` inside the default sandbox and treat a keyring failure as a dead token.
-- Failed because: the sandbox cannot read the keyring. The same command outside the sandbox showed `devruji` logged in.
-- Do instead: rerun `gh` with full permissions before asking for a new login.
 
 ## 2026-10-09 — No shared vehicle id in the samples
 

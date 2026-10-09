@@ -2,7 +2,7 @@
 
 Names for this repo. Use these words in schema, code, issues, and SQL. Add a term when a new name shows up in those places. One term, one meaning. If a new name is a synonym of a term below, use the term below.
 
-The public project name is Harborline. Do not copy an organization name out of `private/`.
+The project name is Harborline.
 
 | Term | Meaning |
 |---|---|

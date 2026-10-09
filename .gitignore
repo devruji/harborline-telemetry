@@ -9,7 +9,7 @@ output/
 .scratch/
 private/
 
-# Repo-local agents and skills. Not part of the public submission.
+# Local editor config.
 .cursor/agents/
 .cursor/skills/
 .cursor/rules/spawn-local-agents.mdc
