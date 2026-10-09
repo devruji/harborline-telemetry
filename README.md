@@ -44,7 +44,7 @@ data/                              the sample extracts
 
 The three databases are attached as `bronze`, `silver`, and `gold`. Files live under `output/` and stay untracked.
 
-Done so far: the repo layout, the docs, the Python 3.12.7 environment, the medallion DDL, and the ingestion command. Gold is still empty. The SQL that fills it is not written.
+Done so far: the repo layout, the docs, the Python 3.12.7 environment, the medallion DDL, the ingestion command, and the three SQL scripts that fill gold.
 
 ## Python
 
