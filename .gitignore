@@ -1,0 +1,15 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+output/
+*.sqlite
+*.sqlite3
+.scratch/
+private/
+
+# Repo-local agents and skills. Not part of the public submission.
+.cursor/agents/
+.cursor/skills/
+.cursor/rules/spawn-local-agents.mdc

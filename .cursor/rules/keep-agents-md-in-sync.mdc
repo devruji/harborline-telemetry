@@ -1,0 +1,18 @@
+---
+description: Keep AGENTS.md aligned with the docs agents must read
+alwaysApply: true
+---
+
+# Keep AGENTS.md in sync
+
+`AGENTS.md` is an index. Detail stays in `docs/`.
+
+In the same change that edits any of these, update the matching one-line summary in `AGENTS.md`:
+
+- `docs/agents/issue-tracker.md`
+- `docs/agents/domain.md`
+- `docs/workflow.md`
+- `docs/glossary.md`
+- `docs/trial-log.md`
+
+Add a new index line when a new doc under `docs/` is something agents must read. Do not paste those docs into `AGENTS.md`.

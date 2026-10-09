@@ -1,0 +1,23 @@
+{
+    "registration": "3ขล-3178",
+    "event_th": "สถานะปกติ",
+    "event_en": "LOCATION",
+    "location_th": "โตโยต้า ถนนพระรามที่ 4 สีลม,บางรัก,กรุงเทพมหานคร",
+    "location_en": "TOYOTA RAMA 4 RD. SI LOM,BANG RAK,BANGKOK",
+    "local_timestamp": "2026-03-01 12:17:41",
+    "lat": 13.72753,
+    "lon": 100.5406,
+    "speed": 0,
+    "course": 0,
+    "type_of_fix": 0,
+    "no_of_satellite": 4,
+    "internal_power": 0,
+    "external_power": 1230,
+    "mileage": null,
+    "Temp1": "-",
+    "Temp2": "-",
+    "Temp3": "-",
+    "fuel_sensor": 0,
+    "fuel_canbus": 0.000,
+    "driver_name": "-"
+}

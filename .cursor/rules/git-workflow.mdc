@@ -1,0 +1,14 @@
+---
+description: Cut feature and hotfix branches from dev; sign-off opens a PR and stops
+alwaysApply: true
+---
+
+# Git flow
+
+Follow `docs/workflow.md`.
+
+- New feature: branch `feat/<slug>` from `dev`.
+- Bug fix: branch `hotfix/<slug>` from `dev`.
+- Do not commit directly on `dev` or `main`.
+- Promotion to `main` is not decided. Do not open a pull request to `main` or merge to `main`.
+- When the user says sign-off or approve: push the current `feat/*` or `hotfix/*` branch, open a pull request into `dev`, and stop. The user merges.
