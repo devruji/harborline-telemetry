@@ -8,11 +8,11 @@ Start at [Assignment index](#assignment-index) to find each answer.
 
 Ingest every sample file into a single position model that can be queried across fleets, while keeping each feed's extra fields and the connected-vehicle event history intact.
 
-## What we will do
+## What this repo does
 
-1. Design the tables and write down how each source field lands.
-2. Build a local Python pipeline that reads the files, checks them, skips bad rows, and loads SQLite without creating duplicates on a rerun.
-3. Write three SQL queries on top of that database: engine sessions, long idle, and positions that disagree across feeds.
+1. Defines the tables and records how each source field lands.
+2. Runs a local Python pipeline that reads the files, checks them, skips bad rows, and loads SQLite without creating duplicates on a rerun.
+3. Answers three questions in SQL on top of that database: engine sessions, long idle, and positions that disagree across feeds.
 
 ## Goal
 
@@ -23,7 +23,7 @@ A teammate can run the pipeline twice on the same files, see the second run inse
 The three feeds do not share a shape, a clock, or a vehicle id.
 
 - The GPS vendor file is one JSON object. A second file repeats those same bytes under another name.
-- The connected-vehicle feed sends two packet types. One packet is an engine-on snapshot. The other is a heartbeat plus about sixty per-second signals, and the battery voltage sits under a different key than the other signals.
+- The connected-vehicle feed sends two packet types. One packet is an engine-on snapshot. The other is a heartbeat plus about sixty per-second entries of signals, and the battery voltage sits under a different key than the other signals.
 - The logistics feed is a spreadsheet with its own column names and its own vehicle labels.
 - Timestamps arrive in three formats. Some clocks sit in 2025 and one sits in 2026.
 - Engine sessions have to survive a missing engine-off, two engine-on events in a row, and timestamps that arrive out of order.
@@ -32,15 +32,17 @@ The three feeds do not share a shape, a clock, or a vehicle id.
 ## Deliver
 
 ```
-README.md                          assumptions, decisions, limitations
+README.md                          index, architecture, assumptions, decisions, limitations, FAQ
 schema/bronze.sql                  raw landing tables
 schema/silver.sql                  typed position, event, and signal tables
 schema/gold.sql                    answer tables, filled by the three SQL scripts
 schema/field_mapping.md            source field to silver column, and what was left out
 pipeline/                          Python ingestion, entry point ingest.py
-sql/query1_engine_sessions.sql
-sql/query2_idle_detection.sql
-sql/query3_cross_source.sql
+sql/query1_engine_sessions.sql     engine sessions
+sql/query2_idle_detection.sql      idle longer than 30 minutes
+sql/query3_cross_source.sql        positions that disagree across sources
+tests/                             schema, ingest, and gold tests
+docs/                              runbook, pipeline guide, glossary, trial log
 data/                              the sample extracts
 ```
 
@@ -90,7 +92,7 @@ Each requirement of the assignment is listed below with a one-line answer and th
 | Requirement | Answer | Where |
 |---|---|---|
 | Document assumptions, data issues found, and how they were handled | The assumptions and limitations are below, the field mapping explains dropped fields, and the trial log records what failed and what replaced it. | [Assumptions](#assumptions), [Limitations](#limitations), [schema/field_mapping.md](schema/field_mapping.md), [docs/trial-log.md](docs/trial-log.md) |
-| Architecture sketch | A diagram shows each sample file flowing through bronze and silver into the gold answer tables. | [Architecture](#architecture) |
+| Architecture sketch | A diagram shows the ingest command writing bronze and silver from the sample files, and the SQL scripts writing gold. | [Architecture](#architecture) |
 
 ## Architecture
 
@@ -132,11 +134,9 @@ flowchart LR
     ingest --> gpsVendorReport
     ingest --> logisticsReport
     ingest --> connectedPacket
-    gpsVendorReport --> positionReport
-    logisticsReport --> positionReport
-    connectedPacket --> positionReport
-    connectedPacket --> b2bEvent
-    connectedPacket --> signalRow
+    ingest --> positionReport
+    ingest --> b2bEvent
+    ingest --> signalRow
     b2bEvent --> q1
     signalRow --> q1
     positionReport --> q1
@@ -149,7 +149,7 @@ flowchart LR
     q3 --> crossSourcePair
 ```
 
-The model is three SQLite files under `output/`, attached as the schemas `bronze`, `silver`, and `gold`. The ingest command writes bronze and silver, and the SQL scripts write gold.
+The model is three SQLite files under `output/`, attached as the schemas `bronze`, `silver`, and `gold`. The ingest command parses each record once and writes its bronze and silver rows in the same pass. The SQL scripts read silver and write gold.
 
 ## Assumptions
 
@@ -205,7 +205,7 @@ Run ingest twice and compare the log lines. Every line on the second run shows `
 
 ## Python
 
-Setup and run commands live in `docs/runbook.md`.
+Setup and run commands live in [docs/runbook.md](docs/runbook.md).
 
 ## Samples
 
