@@ -1,12 +1,13 @@
 # Workflow
 
-Git is the only way work lands on an integration branch. `dev` is that branch. `main` exists, and the path from `dev` to `main` is not decided. Do not open a pull request to `main`, and do not merge to `main`, until that path is written here.
+Git is the only way work lands on a shared branch. `dev` is the integration branch. `main` is the published snapshot of `dev`, and it moves forward only by promotion.
 
 ## Branches
 
 | Kind | Name | Cut from | Lands on |
 |---|---|---|---|
-| Integration | `dev` | — | — |
+| Published | `main` | `dev` | — |
+| Integration | `dev` | — | `main`, by promotion |
 | Feature | `feat/<slug>` | `dev` | `dev` |
 | Bug fix | `hotfix/<slug>` | `dev` | `dev` |
 
@@ -14,7 +15,7 @@ Git is the only way work lands on an integration branch. `dev` is that branch. `
 
 Start each branch from an up-to-date `dev`. Do not commit directly on `dev` or `main`.
 
-There is no release hotfix-from-`main` path yet. Until promotion to `main` is decided, a production bug is still `hotfix/<slug>` from `dev`.
+There is no hotfix-from-`main` path. A fix is `hotfix/<slug>` from `dev`, and it reaches `main` when `dev` is promoted.
 
 ## Sign-off
 
@@ -24,7 +25,17 @@ When the user says **sign-off** or **approve**:
 2. Open a pull request into `dev`.
 3. Stop. The user accepts the merge.
 
-Do not merge the pull request. Do not treat a review comment, a green check, or "looks good" as sign-off. Only those two words start this step.
+Do not merge the pull request. Do not treat a review comment, a green check, or "looks good" as sign-off. Only those two words start this step. Sign-off never targets `main`.
+
+## Promote
+
+When the user says **promote**:
+
+1. Make sure `dev` on the remote has every merged change.
+2. Open a pull request from `dev` into `main`.
+3. Stop. The user accepts the merge.
+
+Do not merge that pull request. Only the word promote starts this step.
 
 ## What a change contains
 
