@@ -33,6 +33,13 @@ uv run python -m pipeline.ingest --data data --output output
 uv run python -m unittest tests.test_ingest
 ```
 
-A second run of the same command inserts nothing. Gold stays empty.
+A second run of the same command inserts nothing.
 
-The three analytical queries are not runnable yet. Add those commands in the same change that creates them.
+## Gold
+
+Run ingest first so silver exists. Each script deletes its gold rows, then inserts them again.
+
+```bash
+sqlite3 output/gold.sqlite "ATTACH 'output/silver.sqlite' AS silver;" ".read sql/query1_engine_sessions.sql" ".read sql/query2_idle_detection.sql" ".read sql/query3_cross_source.sql"
+uv run python -m unittest tests.test_gold
+```
