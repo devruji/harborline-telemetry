@@ -12,4 +12,16 @@ uv sync
 uv run python --version
 ```
 
-Schema, pipeline, and SQL are not runnable yet. Add the ingest command and the three SQL commands here in the same change that creates those files.
+## Schema
+
+The DDL creates empty databases. It does not load the samples.
+
+```bash
+mkdir -p output
+sqlite3 output/bronze.sqlite < schema/bronze.sql
+sqlite3 output/silver.sqlite < schema/silver.sql
+sqlite3 output/gold.sqlite < schema/gold.sql
+uv run python -m unittest tests.test_schema
+```
+
+The pipeline and the three analytical queries are not runnable yet. Add those commands in the same change that creates them.

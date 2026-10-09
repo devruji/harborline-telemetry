@@ -31,8 +31,10 @@ The three feeds do not share a shape, a clock, or a vehicle id.
 
 ```
 README.md                          assumptions, decisions, limitations
-schema/unified_schema.sql          table definitions
-schema/field_mapping.md            source field to column, and what was left out
+schema/bronze.sql                  raw landing tables
+schema/silver.sql                  typed position, event, and signal tables
+schema/gold.sql                    answer tables, empty until the SQL exists
+schema/field_mapping.md            source field to silver column, and what was left out
 pipeline/                          Python ingestion, entry point ingest.py
 sql/query1_engine_sessions.sql
 sql/query2_idle_detection.sql
@@ -40,9 +42,9 @@ sql/query3_cross_source.sql
 data/                              the sample extracts
 ```
 
-The pipeline writes SQLite under `output/`. That directory stays untracked.
+The three databases are attached as `bronze`, `silver`, and `gold`. Files live under `output/` and stay untracked.
 
-Done so far: the repo layout, the docs, and the Python 3.12.7 environment. Schema, pipeline, and SQL are still empty.
+Done so far: the repo layout, the docs, the Python 3.12.7 environment, and the medallion DDL. The pipeline and the SQL that fill gold are still empty.
 
 ## Python
 
